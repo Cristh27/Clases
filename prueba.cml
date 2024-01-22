@@ -1,12 +1,53 @@
-BoundedContext ProductCatalogManagmentContext implements ProductCatalogManagmentDomain
-BoundedContext CustomerManagmentContext implements CustomerManagmentDomain
-BoundedContext InventoryManagmentContext implements InventoryManagmentDomain
-BoundedContext PaymentManagmentContext implements PaymentManagmentDomain
-BoundedContext ShippingManagmentContext implements ShippingManagmentDomain
-BoundedContext SecurityManagmentContext implements SecurityManagmentDomain
+BoundedContext ProductCatalogManagmentContext implements ProductCatalogDomain
+BoundedContext CustomerManagmentContext implements CustomerDomain
+BoundedContext OrdersManagmentContext implements OrdersDomain
+BoundedContext InventoryManagmentContext implements InventoryDomain
+BoundedContext PaymentManagmentContext implements PaymentDomain
+BoundedContext ShippingManagmentContext implements ShippingDomain
+BoundedContext SecurityManagmentContext implements SecurityDomain
 
 
 ContextMap Prueba{
-    
+    type SYSTEM_LANDSCAPE
+    state TO_BE
+   /*agregando bounded contexts al mapa de contexto*/
+    contains ProductCatalogManagmentContext,CustomerManagmentContext,OrdersManagmentContext,InventoryManagmentContext,PaymentManagmentContext,ShippingManagmentContext,SecurityManagmentContext
+    /*definiendo relaciones entre bounded contexts*/
+    ProductCatalogManagmentContext Partnership OrdersManagmentContext
+    ProductCatalogManagmentContext Customer-Supplier CustomerManagmentContext
+    ProductCatalogManagmentContext Shared-Kernel InventoryManagmentContext
+    CustomerManagmentContext [D,ACL]<- [U,OHS,PL] SecurityManagmentContext
+    OrdersManagmentContext Customer-Supplier PaymentManagmentContext
+    SecurityManagmentContext Customer-Supplier ShippingManagmentContext
+    //SecurityManagmentContext [U,OHS]->[D,ACL] CustomerManagmentContext
+    InventoryManagmentContext [D,CF]<-[U,OHS,PL]ShippingManagmentContext
 
+}
+
+Domain Prueba{
+    Subdomain ProductCatalogDomain{
+        type= CORE_DOMAIN
+        domainVisionStatement="Gestion del catalogo de productos"
+    }
+    Subdomain CustomerDomain{
+        type= SUPPORTING_DOMAIN
+        
+    }
+    Subdomain OrdersDomain{
+        type=SUPPORTING_DOMAIN
+    }
+
+    Subdomain InventoryDomain{
+        type= GENERIC_SUBDOMAIN
+    }
+    Subdomain PaymentDomain{
+        type = GENERIC_SUBDOMAIN
+    }
+    Subdomain ShippingDomain{
+        type = SUPPORTING_DOMAIN
+    }
+    Subdomain SecurityDomain{
+        type = GENERIC_SUBDOMAIN
+    }
+    
 }
