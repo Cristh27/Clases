@@ -1,8 +1,8 @@
 image:
-  file: gitpod.Dorckerfile
+  file: .gitpod.Dockerfile
 
-  vscode:
+vscode:
+    extensions:
     - jebbs.plantuml
-    - contextmapper.context -mapper-vscode-extension
+    - contextmapper.context-mapper-vscode-extension
 
-    

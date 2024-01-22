@@ -1,0 +1,12 @@
+BoundedContext ProductCatalogManagmentContext implements ProductCatalogManagmentDomain
+BoundedContext CustomerManagmentContext implements CustomerManagmentDomain
+BoundedContext InventoryManagmentContext implements InventoryManagmentDomain
+BoundedContext PaymentManagmentContext implements PaymentManagmentDomain
+BoundedContext ShippingManagmentContext implements ShippingManagmentDomain
+BoundedContext SecurityManagmentContext implements SecurityManagmentDomain
+
+
+ContextMap Prueba{
+    
+
+}
